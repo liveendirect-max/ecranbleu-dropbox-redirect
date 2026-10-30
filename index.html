@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="referrer" content="no-referrer" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Retour à Ecranbleu</title>
+    <style>
+      body {
+        background: #071a2b;
+        color: #fff;
+        font: 18px system-ui, sans-serif;
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        text-align: center;
+      }
+      main {
+        max-width: 34rem;
+        padding: 2rem;
+      }
+      a {
+        color: #8fcaff;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Retour à Ecranbleu</h1>
+      <p id="message">La page Dropbox a répondu. Retour à l’application…</p>
+      <a id="return-link" hidden>Revenir à Ecranbleu</a>
+    </main>
+    <script>
+      const parameters = new URLSearchParams(window.location.search);
+      const callback = new URL('com.anonymous.MultiTVSample://dropbox-callback/');
+      callback.search = parameters.toString();
+
+      const returnLink = document.getElementById('return-link');
+      returnLink.href = callback.toString();
+      returnLink.hidden = false;
+
+      if (!parameters.has('code') && !parameters.has('error')) {
+        document.getElementById('message').textContent =
+          'Aucune réponse Dropbox n’a été reçue. Reviens dans Ecranbleu et relance la connexion.';
+      } else {
+        window.location.replace(callback.toString());
+      }
+    </script>
+  </body>
+</html>
