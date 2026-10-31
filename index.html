@@ -13,7 +13,9 @@
       body {
         background: #071a2b;
         color: #fff;
-        font: 18px system-ui, sans-serif;
+        font:
+          18px system-ui,
+          sans-serif;
         margin: 0;
         min-height: 100vh;
         display: grid;
@@ -37,7 +39,7 @@
     </main>
     <script>
       const parameters = new URLSearchParams(window.location.search);
-      const callback = new URL('com.anonymous.MultiTVSample://dropbox-callback/');
+      const callback = new URL('ecranbleu://dropbox-callback/');
       callback.search = parameters.toString();
 
       const returnLink = document.getElementById('return-link');
